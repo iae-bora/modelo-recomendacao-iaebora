@@ -75,6 +75,6 @@ print("Treinaremos com %d elementos e testaremos com %d elementos" % (len(X_trai
 modelo = RandomForestClassifier()
 modelo.fit(X_train, y_train)
 previsoes_SVC = modelo.predict(X_train)
-acuracia = accuracy_score(y_train, previsoes_SVC) * 10
+acuracia = accuracy_score(y_train, previsoes_SVC) * 100
 print("A acurácia foi de %.2f%%" % acuracia)
 
