@@ -85,7 +85,7 @@ def CalcularIdade(dataset ):
         dataset['idade'][index] = dataset['idade'].mean()
     return dataset
 
-def SepararDestinos(dataset):
+def SepararDestinos(dataset, locais):
     for index, row in dataset.iterrows():
         dataset['destino'][index] = row['destino'].replace('Jogos (kart, boliche, paintball...)', 'Jogos').strip()
 
@@ -105,11 +105,9 @@ def SepararDestinos(dataset):
         'destino' : list(chain.from_iterable(auxDataset.tolist())), 
     })
     
-    locais = ['CINEMA', 'RESTAURANTE', 'SHOPPING', 'PARQUE', 'SHOW', 'MUSEU', 'BIBLIOTECA', 'ESTÁDIO', 'BIBLIOTECA', 'JOGOS', 'TEATRO', 'BAR']
 
     for index, row in dataset.iterrows():
         if dataset['destino'][index].strip().upper() not in locais:
-            print(dataset['destino'][index].upper())
             dataset['destino'][index] = 'OUTROS'
 
     return dataset
