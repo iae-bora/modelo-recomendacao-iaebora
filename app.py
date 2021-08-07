@@ -5,18 +5,6 @@ import pickle, os
 from numpy.core.records import record
 import treino_modelo as treino
 
-entrada = {
-    "musica" : 1,
-    "comida" : 1,
-    "filme" : 1,
-    "esporte": 1,
-    "time" : 1,
-    "religiao" : 1,
-    "filhos" : 1,
-    "nascimento" : 20, 
-    "qtd_destinos" : 2
-}
-
 app = Flask(__name__)
 CORS(app)
 
