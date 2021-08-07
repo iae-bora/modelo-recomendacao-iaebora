@@ -1,7 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
 import pickle, os
-
 from numpy.core.records import record
 import treino_modelo as treino
 
