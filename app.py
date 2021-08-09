@@ -6,8 +6,8 @@ import treino_modelo as treino
 import json
 
 
-#app = Flask(__name__)
-#CORS(app)
+app = Flask(__name__)
+CORS(app)
 
 entrada = {
     "musica" : 1,
@@ -24,13 +24,13 @@ entrada = {
 saida = {}
 
 
-#@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
     return { 'message': 'Working correctly!' }
 
-#@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
-    #entrada = request.get_json(force=True)['answers']
+    entrada = request.get_json(force=True)['answers']
 
     print("Teste entrada")
     lista = list(entrada.values())
@@ -51,9 +51,9 @@ def predict():
 
     return saida
 
-#if __name__ == "__main__":
-#    port = int(os.environ.get("PORT", 5000))
-#    app.run(host='0.0.0.0', port=port)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 print(predict())
 
