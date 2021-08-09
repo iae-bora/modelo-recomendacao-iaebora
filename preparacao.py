@@ -109,5 +109,8 @@ def SepararDestinos(dataset, locais):
     for index, row in dataset.iterrows():
         if dataset['destino'][index].strip().upper() not in locais:
             dataset['destino'][index] = 'OUTROS'
+            if row['destino'] == 'RESTAURANTE':
+                dataset['destino'][index] = 'PARQUE'
 
+                
     return dataset

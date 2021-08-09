@@ -59,5 +59,7 @@ def Recomendacao(locais):
     previsoes_SVC = modelo.predict(X_train)
     acuracia = accuracy_score(y_train, previsoes_SVC) * 100
     print("A acurácia foi de %.2f%%" % acuracia)
+    print(dataset['destino'].value_counts)
+
     return modelo
 
