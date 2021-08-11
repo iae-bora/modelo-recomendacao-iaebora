@@ -3,26 +3,10 @@ from flask_cors import CORS
 import pickle, os
 from numpy.core.records import record
 import treino_modelo as treino
-import json
 
 
 app = Flask(__name__)
 CORS(app)
-
-entrada = {
-    "musica" : 1,
-    "comida" : 1,
-    "filme" : 1,
-    "esporte": 1,
-    "time" : 1,
-    "religiao" : 1,
-    "filhos" : 1,
-    "nascimento" : 20, 
-    "qtd_destinos" : 5
-}
-
-saida = {}
-
 
 @app.route('/', methods=['GET'])
 def home():
@@ -55,5 +39,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
 
-print(predict())
 
