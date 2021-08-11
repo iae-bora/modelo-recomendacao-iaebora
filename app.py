@@ -16,7 +16,6 @@ def home():
 def predict():
     entrada = request.get_json(force=True)['answers']
 
-    print("Teste entrada")
     lista = list(entrada.values())
     print(lista)
 
