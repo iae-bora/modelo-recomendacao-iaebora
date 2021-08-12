@@ -2,4 +2,4 @@ Flask-Cors==3.0.8
 Flask==1.1.2
 pandas==1.0.3
 numpy==1.18.2
-scikit-learn==0.22.2.post1
+scikit-learn==0.22.2
