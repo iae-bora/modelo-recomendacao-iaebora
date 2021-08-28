@@ -13,53 +13,45 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.model_selection import GridSearchCV
 import preparacao
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import BaggingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+bagging = BaggingClassifier(KNeighborsClassifier(), max_samples=0.5, max_features=0.5)
+
 from sklearn.ensemble import RandomForestClassifier
+import warnings
+warnings.filterwarnings('ignore')
 
 
-def Recomendacao(locais):
-    dataset = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTovXh_UG_XTyZoRjvsWsqOdLWpfLTxTLTG0_tj57dPg1AXlOMuqOsnezGQv8_PAQPnku8S-Nf-6PS4/pub?output=csv")
-
-    #Renomear colunas
-    colunas = {
-        'Qual gênero musical você mais gosta?' : 'genero_musical',
-        'Qual o seu tipo de comida favorito?' : 'comida_favorita',
-        'Qual o seu estilo de filme favorito' : 'filme_favorito',
-        'Qual seu esporte favorito? ' : 'esporte_favorito',
-        'Torce para algum time?' : 'time',
-        'Possui alguma religião?' : 'religiao',
-        'Tem filhos?' : 'tem_filhos',
-        'Qual a sua data de nascimento? ' : 'data_nascimento',
-        'Que tipo de lugar você mais gosta de ir?' : 'destino'
-    }
-
-    dataset = dataset.rename(columns = colunas)
-
-    dataset = preparacao.PadronizarValores(dataset)
-
-    dataset = preparacao.CalcularIdade(dataset)
-
-    dataset = preparacao.SepararDestinos(dataset, locais)
+def Recomendacao(locais, dataset, rodada, entrada):
 
 
     #Separação de treino e teste
+    #dataset.to_csv('C:\\Users\\Kaique\\OneDrive\\Área de Trabalho\\TCC\\dados1.csv')
     y = dataset['destino'].str.strip()
     x = dataset.drop(columns=['destino'])
 
 
     #Clusterização
-    modelo = AgglomerativeClustering(n_clusters=3)
-    grupos = modelo.fit_predict(x)
-    x['Cluster'] = modelo.labels_
+    modeloCluster = KMeans(n_clusters=3)
+    grupos = modeloCluster.fit_predict(x)
+    x['Cluster'] = modeloCluster.labels_
+    entrada.append(modeloCluster.predict([entrada]))
+
 
     X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
 
-    modelo = RandomForestClassifier()
+    modelo = DecisionTreeClassifier()
     modelo.fit(X_train, y_train)
     previsoes_SVC = modelo.predict(X_train)
     acuracia = accuracy_score(y_train, previsoes_SVC) * 100
+    print("---------------------------------------------------------------------------------------------")
+    print("Rodada: " + str(rodada))
+    print("Treinaremos com %d elementos e testaremos com %d elementos" % (len(X_train), len(X_test)))
     print("A acurácia foi de %.2f%%" % acuracia)
-    print(dataset['destino'].value_counts)
+    #print(dataset['destino'].value_counts)
+    saida = modelo.predict([entrada])
 
-    return modelo
+    return saida, acuracia
 

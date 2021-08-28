@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 from itertools import chain
+import warnings
+warnings.filterwarnings('ignore')
+
 
 
 genero_musical ={
