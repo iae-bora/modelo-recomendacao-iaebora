@@ -36,18 +36,6 @@ enum_saida = {
     "Bar" : 10 
 }
 
-entrada = {
-    "musica" : 1,
-    "comida" : 1,
-    "filme" : 1,
-    "esporte": 1,
-    "time" : 1,
-    "religiao" : 1,
-    "filhos" : 1,
-    "nascimento" : 20, 
-    "qtd_destinos" : 2
-}
-
 app = Flask(__name__)
 CORS(app)
 
@@ -57,7 +45,7 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    #entrada = request.get_json(force=True)['answers']
+    entrada = request.get_json(force=True)['answers']
 
     dataset = pd.read_csv("dados.csv")
     dataset = dataset.drop(columns='Unnamed: 0')
@@ -122,7 +110,7 @@ def Train():
             plt.draw()
             plt.pause(0.05)
             plt.show()
-    return dataset
+    dataset.to_csv("dados.csv")
 
 
 
