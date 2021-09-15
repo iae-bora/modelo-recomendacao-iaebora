@@ -23,17 +23,16 @@ locais = ['CINEMA', 'RESTAURANTE', 'SHOPPING', 'PARQUE', 'SHOW', 'MUSEU', 'BIBLI
 
 
 enum_saida = {
-    "Cinema" : 0,
-    "Restaurante" : 1,
-    "Parque" : 2,
-    "Shopping" : 3,
-    "Show" : 4,
-    "Museu" : 5,
-    "Biblioteca" : 6,
-    "Estádio" : 7,
-    "Jogos" : 8,
-    "Teatro" : 9,
-    "Bar" : 10 
+    "Parque" : 1,
+    "Museu" : 2,
+    "Cinema" : 3,
+    "Shopping" : 4,
+    "Bar" : 5,
+    "Show" : 7,
+    "Biblioteca" : 8,
+    "Estádio" : 9,
+    "Jogos" : 10,
+    "Teatro" : 11,
 }
 
 app = Flask(__name__)
