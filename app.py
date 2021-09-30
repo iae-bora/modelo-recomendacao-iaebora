@@ -18,8 +18,7 @@ warnings.filterwarnings('ignore')
 rodadas = []
 acuracias = []
 acuracias_sample = []
-retornos = []
-locais = ['CINEMA', 'RESTAURANTE', 'SHOPPING', 'PARQUE', 'SHOW', 'MUSEU', 'BIBLIOTECA', 'ESTÁDIO', 'BIBLIOTECA', 'JOGOS', 'TEATRO', 'BAR']
+
 
 
 enum_saida = {
@@ -44,6 +43,10 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+
+    retornos = []
+    locais = ['CINEMA', 'RESTAURANTE', 'SHOPPING', 'PARQUE', 'SHOW', 'MUSEU', 'BIBLIOTECA', 'ESTÁDIO', 'BIBLIOTECA', 'JOGOS', 'TEATRO', 'BAR']
+    
     entrada = request.get_json(force=True)['answers']
 
     dataset = pd.read_csv("dados.csv")
